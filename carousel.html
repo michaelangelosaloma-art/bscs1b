@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6 Image Carousel with Buttons</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0eaff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    width: 90%;
+    max-width: 750px;
+    background: white;
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 15px 30px #b9a6dd;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    color: #2c2152;
+}
+
+/* CAROUSEL */
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-bottom: 1rem;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    width: 260px;
+    height: 170px;
+    border-radius: 1rem;
+    overflow: hidden;
+    scroll-snap-align: center;
+    box-shadow: 0 8px 12px #9d87cf;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* BUTTONS */
+.buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.buttons button {
+    background: #7a62b5;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.buttons button:hover {
+    background: #5e4aa0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Carousel</h>
+    <!-- CAROUSEL -->
+    <div class="carousel" id="carousel">
+
+        <div class="carousel-item">
+            <img src="image/a" alt="">
+        </div>
+
+        <div class="carousel-item">
+            <img src="image/b" alt="">
+        </div>
+
+        <div class="carousel-item">
+            <img src="image/c" alt="">
+        </div>
+
+        <div class="carousel-item">
+            <img src="image/d" alt="">
+        </div>
+
+        <div class="carousel-item">
+            <img src="image/e" alt="">
+        </div>
+
+        <div class="carousel-item">
+            <img src="image/f" alt="">
+        </div>
+
+    </div>
+
+    <!-- 6 BUTTONS -->
+    <div class="buttons">
+        <button onclick="goTo(0)">cat 1</button>
+        <button onclick="goTo(1)">cat 2</button>
+        <button onclick="goTo(2)">cat 3</button>
+        <button onclick="goTo(3)">cat 4</button>
+        <button onclick="goTo(4)">cat 5</button>
+        <button onclick="goTo(5)">cat 6</button>
+    </div>
+</div>
+
+<script>
+const carousel = document.getElementById("carousel");
+const items = document.querySelectorAll(".carousel-item");
+
+function goTo(index) {
+    items[index].scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest"
+    });
+}
+</script>
+
+</body>
+</html>
