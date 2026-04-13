@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JS Random Playground</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        margin:20px;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
+        color:#222;
+    }
+
+    h1{
+        text-align:center;
+        color:#4a148c;
+    }
+
+    h2{
+        margin-top:35px;
+        color:#ff1744;
+    }
+
+    button{
+        padding:8px 14px;
+        margin:5px;
+        border:none;
+        border-radius:25px;
+        cursor:pointer;
+        background: linear-gradient(45deg, #00c6ff, #0072ff, #7f00ff);
+        color:white;
+        transition:0.3s;
+    }
+
+    button:hover{
+        transform:scale(1.08);
+        opacity:0.9;
+    }
+
+    input{
+        padding:8px;
+        margin:5px;
+        border-radius:10px;
+        border:1px solid #888;
+    }
+
+    .out{
+        margin:10px 0;
+        padding:10px;
+        background:rgba(255,255,255,0.7);
+        border-radius:10px;
+        font-family:monospace;
+    }
+
+    ul{
+        padding-left:20px;
+    }
+
+    p{
+        margin:8px 0;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>10 buttons</h1>
+
+<h2>Alert</h2>
+<button onclick="alert('Random alert fired!')">Click Me</button>
+
+<h2>Change Text</h2>
+<p id="txt">Original text here</p>
+<button onclick="changeText()">Change</button>
+
+<h2>Counter</h2>
+<p>Clicks: <span id="count">0</span></p>
+<button onclick="addCount()">+1</button>
+
+<h2>Name Input</h2>
+<input id="name" placeholder="Enter name">
+<button onclick="sayHello()">Go</button>
+<div class="out" id="helloBox"></div>
+
+<h2>Age Check</h2>
+<input id="age" type="number" placeholder="Age">
+<button onclick="checkAge()">Check</button>
+<div class="out" id="ageBox"></div>
+
+<h2>Math Zone</h2>
+<input id="a" type="number" placeholder="A">
+<input id="b" type="number" placeholder="B">
+
+<button onclick="add()">Add</button>
+<button onclick="sub()">Minus</button>
+<button onclick="mul()">Times</button>
+
+<div class="out" id="math">Result...</div>
+
+<h2>Light Toggle</h2>
+<div id="lamp" style="padding:15px;border-radius:10px;background:#555;color:white;">
+OFF
+</div>
+<button onclick="toggle()">Switch</button>
+
+<h2>Loop Generator</h2>
+<button onclick="loop()">Generate</button>
+<button onclick="clearList()">Clear</button>
+<ul id="list"></ul>
+
+<h2>Final Mix</h2>
+
+<button onclick="showVars()">Variables</button>
+<button onclick="calc()">Math</button>
+
+<input id="score" type="number" placeholder="Score">
+<button onclick="grade()">Grade</button>
+
+<button onclick="promptName()">Prompt</button>
+
+<div class="out" id="final"></div>
+
+<script>
+
+let count = 0;
+let lamp = false;
+
+/* ALERT */
+function changeText(){
+    document.getElementById("txt").innerHTML =
+    "Changed at " + new Date().toLocaleTimeString();
+}
+
+/* COUNTER */
+function addCount(){
+    count++;
+    document.getElementById("count").innerHTML = count;
+}
+
+/* NAME */
+function sayHello(){
+    let n = document.getElementById("name").value || "Guest";
+    document.getElementById("helloBox").innerHTML = "Hi " + n;
+}
+
+/* AGE */
+function checkAge(){
+    let a = Number(document.getElementById("age").value);
+    document.getElementById("ageBox").innerHTML =
+    a >= 18 ? "Adult" : "Minor";
+}
+
+/* MATH */
+function get(){
+    return [
+        Number(document.getElementById("a").value || 0),
+        Number(document.getElementById("b").value || 0)
+    ];
+}
+
+function add(){
+    let [x,y] = get();
+    document.getElementById("math").innerHTML = `${x} + ${y} = ${x+y}`;
+}
+
+function sub(){
+    let [x,y] = get();
+    document.getElementById("math").innerHTML = `${x} - ${y} = ${x-y}`;
+}
+
+function mul(){
+    let [x,y] = get();
+    document.getElementById("math").innerHTML = `${x} × ${y} = ${x*y}`;
+}
+
+/* LIGHT */
+function toggle(){
+    lamp = !lamp;
+    let box = document.getElementById("lamp");
+
+    box.innerHTML = lamp ? "ON" : "OFF";
+    box.style.background = lamp ? "#00c853" : "#555";
+}
+
+/* LOOP */
+function loop(){
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+
+    for(let i=1;i<=5;i++){
+        list.innerHTML += `<li>Random ${i}</li>`;
+    }
+}
+
+function clearList(){
+    document.getElementById("list").innerHTML = "";
+}
+
+/* FINAL */
+function showVars(){
+    let x = 9;
+    const name = "Random JS";
+
+    document.getElementById("final").innerHTML =
+    `let=${x} | const=${name}`;
+}
+
+function calc(){
+    let a=6,b=3;
+    document.getElementById("final").innerHTML =
+    `+ ${a+b} | - ${a-b}`;
+}
+
+function grade(){
+    let s = Number(document.getElementById("score").value);
+    let g = s>=90?"A":s>=80?"B":s>=70?"C":s>=60?"D":"F";
+
+    document.getElementById("final").innerHTML =
+    "Grade: " + g;
+}
+
+function promptName(){
+    let n = prompt("Enter name:");
+    if(n){
+        document.getElementById("final").innerHTML =
+        "Hello " + n;
+    }
+}
+
+</script>
+
+</body>
+</html>
